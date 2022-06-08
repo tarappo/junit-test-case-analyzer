@@ -1,0 +1,25 @@
+name: "integration-test"
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Parse JUnit.xml
+        id: parse_junit_report
+        uses: ./
+        with:
+          junit_report_paths: "./fixtures/*.xml"
+      - name: Ouputs
+        run: |
+          echo ${{ steps.junit-report-action.outputs.total_test_cases }}
+          echo ${{ steps.junit-report-action.outputs.total_failure_cases }}
+          echo ${{ steps.junit-report-action.outputs.total_error_cases }}
+          echo ${{ steps.junit-report-action.outputs.total_skipped_cases }}
+          echo ${{ steps.junit-report-action.outputs.total_success_cases }}
