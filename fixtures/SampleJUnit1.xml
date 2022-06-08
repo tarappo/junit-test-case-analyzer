@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.tarappo.SampleTest2" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-06-03T22:50:24" hostname="sample" time="0.017">
+  <properties/>
+  <testcase name="SampleTestCase1" classname="com.tarappo.SampleTest2.Gyouza" time="0.017"/>
+  <testcase name="SampleTestCase2" classname="com.tarappo.SampleTest2.Gyouza" time="0.0"/>
+</testsuite>
