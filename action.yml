@@ -1,0 +1,51 @@
+name: 'Analyze JUnit.xml test report'
+description: 'outputs test cases'
+inputs:
+  junit_report_paths:
+    description: 'JUnit.xml report path'
+    required: true
+outputs:
+  total_test_cases:
+    description: 'total test cases'
+    value: ${{ steps.junit-report-action.outputs.total_test_cases }}
+  total_failure_cases:
+    description: 'total failure cases'
+    value: ${{ steps.junit-report-action.outputs.total_failure_cases }}
+  total_error_cases:
+    description: 'total error cases'
+    value: ${{ steps.junit-report-action.outputs.total_error_cases }}
+  total_skipped_cases:
+    description: 'total skipped cases'
+    value: ${{ steps.junit-report-action.outputs.total_skipped_cases }}
+  total_success_cases:
+    description: 'total success cases'
+    value: ${{ steps.junit-report-action.outputs.total_success_cases }}
+runs:
+  using: "composite"
+  steps:
+    - name: "parse JUnit.xml"
+      shell: bash
+      id: junit-report-action
+      run: |
+        report_files=${{ inputs.junit_report_paths }}
+
+        TOTAL_TEST_CASES=0
+        TOTAL_FAILURE_CASES=0
+        TOTAL_ERROR_CASES=0
+        TOTAL_SKIPPED_CASES=0
+        TOTAL_SUCCESS_CASES=0
+
+        for file in ${report_files}
+        do
+          TOTAL_TEST_CASES=$((TOTAL_TEST_CASES+`npx junit2json "${file}" | jq .tests`))
+          TOTAL_FAILURE_CASES=$((TOTAL_FAILURE_CASES+`npx junit2json "${file}" | jq .failures`))
+          TOTAL_ERROR_CASES=$((TOTAL_ERROR_CASES+`npx junit2json "${file}" | jq .errors`))
+          TOTAL_SKIPPED_CASES=$((TOTAL_SKIPPED_CASES+`npx junit2json "${file}" | jq .skipped`))
+          TOTAL_SUCCESS_CASES=$((TOTAL_TEST_CASES-TOTAL_FAILURE_CASES-TOTAL_ERROR_CASES-TOTAL_SKIPPED_CASES))
+
+          echo "::set-output name=total_test_cases:$(echo $TOTAL_TEST_CASES)"
+          echo "::set-output name=total_failure_cases:$(echo $TOTAL_FAILURE_CASES)"
+          echo "::set-output name=total_error_cases:$(echo $TOTAL_ERROR_CASES)"
+          echo "::set-output name=total_skipped_cases:$(echo $TOTAL_SKIPPED_CASES)"
+          echo "::set-output name=total_success_cases:$(echo $TOTAL_SUCCESS_CASES)"
+        done
