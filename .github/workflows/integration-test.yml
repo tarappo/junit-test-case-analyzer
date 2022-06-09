@@ -18,8 +18,8 @@ jobs:
           junit_report_paths: "./fixtures/*.xml"
       - name: Ouputs
         run: |
-          echo ${{ steps.junit-report-action.outputs.total_test_cases }}
-          echo ${{ steps.junit-report-action.outputs.total_failure_cases }}
-          echo ${{ steps.junit-report-action.outputs.total_error_cases }}
-          echo ${{ steps.junit-report-action.outputs.total_skipped_cases }}
-          echo ${{ steps.junit-report-action.outputs.total_success_cases }}
+          echo ${{ env.TOTAL_TEST_CASES }}
+          echo ${{ env.TOTAL_FAILURE_CASES }}
+          echo ${{ env.TOTAL_ERROR_CASES }}
+          echo ${{ env.TOTAL_SKIPPED_CASES }}
+          echo ${{ env.TOTAL_SUCCESS_CASES }}
