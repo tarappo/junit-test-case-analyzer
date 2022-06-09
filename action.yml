@@ -42,10 +42,10 @@ runs:
           TOTAL_ERROR_CASES=$((TOTAL_ERROR_CASES+`npx junit2json "${file}" | jq .errors`))
           TOTAL_SKIPPED_CASES=$((TOTAL_SKIPPED_CASES+`npx junit2json "${file}" | jq .skipped`))
           TOTAL_SUCCESS_CASES=$((TOTAL_TEST_CASES-TOTAL_FAILURE_CASES-TOTAL_ERROR_CASES-TOTAL_SKIPPED_CASES))
-
-          echo "::set-output name=total_test_cases:$(echo $TOTAL_TEST_CASES)"
-          echo "::set-output name=total_failure_cases:$(echo $TOTAL_FAILURE_CASES)"
-          echo "::set-output name=total_error_cases:$(echo $TOTAL_ERROR_CASES)"
-          echo "::set-output name=total_skipped_cases:$(echo $TOTAL_SKIPPED_CASES)"
-          echo "::set-output name=total_success_cases:$(echo $TOTAL_SUCCESS_CASES)"
         done
+
+        "TOTAL_TEST_CASES=$TOTAL_TEST_CASES" >> $GITHUB_ENV
+        "TOTAL_FAILURE_CASES=$TOTAL_FAILURE_CASES" >> $GITHUB_ENV
+        "TOTAL_ERROR_CASES=$TOTAL_ERROR_CASES" >> $GITHUB_ENV
+        "TOTAL_SKIPPED_CASES=$TOTAL_SKIPPED_CASES" >> $GITHUB_ENV
+        "TOTAL_SUCCESS_CASES=$TOTAL_SUCCESS_CASES" >> $GITHUB_ENV
