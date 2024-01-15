@@ -61,4 +61,3 @@ runs:
         echo "total_error_cases=$TOTAL_ERROR_CASES" >> $GITHUB_OUTPUT
         echo "total_skipped_cases=$TOTAL_SKIPPED_CASES" >> $GITHUB_OUTPUT
         echo "total_success_cases=$TOTAL_SUCCESS_CASES" >> $GITHUB_OUTPUT
-```
