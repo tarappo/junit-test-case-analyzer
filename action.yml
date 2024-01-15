@@ -1,5 +1,9 @@
 name: 'Analyze JUnit.xml test report'
 description: 'outputs test cases'
+branding:
+  color: 'yellow'
+  icon: 'check-circle'
+
 inputs:
   junit_report_paths:
     description: 'JUnit.xml report path'
