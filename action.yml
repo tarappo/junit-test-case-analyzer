@@ -44,8 +44,17 @@ runs:
           TOTAL_SUCCESS_CASES=$((TOTAL_TEST_CASES-TOTAL_FAILURE_CASES-TOTAL_ERROR_CASES-TOTAL_SKIPPED_CASES))
         done
 
+        # env
         echo "TOTAL_TEST_CASES=$TOTAL_TEST_CASES" >> $GITHUB_ENV
         echo "TOTAL_FAILURE_CASES=$TOTAL_FAILURE_CASES" >> $GITHUB_ENV
         echo "TOTAL_ERROR_CASES=$TOTAL_ERROR_CASES" >> $GITHUB_ENV
         echo "TOTAL_SKIPPED_CASES=$TOTAL_SKIPPED_CASES" >> $GITHUB_ENV
         echo "TOTAL_SUCCESS_CASES=$TOTAL_SUCCESS_CASES" >> $GITHUB_ENV
+
+        # output
+        echo "total_test_cases=$TOTAL_TEST_CASES" >> $GITHUB_OUTPUT
+        echo "total_failure_cases=$TOTAL_FAILURE_CASES" >> $GITHUB_OUTPUT
+        echo "total_error_cases=$TOTAL_ERROR_CASES" >> $GITHUB_OUTPUT
+        echo "total_skipped_cases=$TOTAL_SKIPPED_CASES" >> $GITHUB_OUTPUT
+        echo "total_success_cases=$TOTAL_SUCCESS_CASES" >> $GITHUB_OUTPUT
+```
